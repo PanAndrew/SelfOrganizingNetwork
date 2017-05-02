@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfOrganizingNetworkLib", "SelfOrganizingNetwork\SelfOrganizingNetworkLib.csproj", "{64E28DF2-BD93-463E-9430-F26D4BB0AB49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryTests", "LibraryTests\LibraryTests.csproj", "{D48CF53B-8143-4FC1-A0E8-FEDEFD27E04C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64E28DF2-BD93-463E-9430-F26D4BB0AB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E28DF2-BD93-463E-9430-F26D4BB0AB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E28DF2-BD93-463E-9430-F26D4BB0AB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E28DF2-BD93-463E-9430-F26D4BB0AB49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D48CF53B-8143-4FC1-A0E8-FEDEFD27E04C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48CF53B-8143-4FC1-A0E8-FEDEFD27E04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48CF53B-8143-4FC1-A0E8-FEDEFD27E04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48CF53B-8143-4FC1-A0E8-FEDEFD27E04C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -14,6 +14,7 @@ namespace SelfOrganizingNetwork
         public List<ObservablePoint> observableList { get; private set; }
         public List<CenterPoint> centerList { get; private set; }
 
+        public List<double> mseValues { get; private set; }
 
         public RandomPartition(int numberOfCenters)
         {
@@ -22,6 +23,7 @@ namespace SelfOrganizingNetwork
 
             observableList = new List<ObservablePoint>();
             centerList = new List<CenterPoint>();
+            mseValues = new List<double>();
 
             fileOp.LoadCoordinates();
         }
@@ -112,24 +114,28 @@ namespace SelfOrganizingNetwork
             double arythAvrgOfY;
             foreach (CenterPoint cntPoint in centerList)
             {
-                arythAvrgOfX = 0;
-                arythAvrgOfY = 0;
-
-                cntPoint.PrevAvgX = cntPoint.X;
-                cntPoint.PrevAvgY = cntPoint.Y;
-
-                foreach (ObservablePoint obsPoint in cntPoint.listOfObsPoint)
+                if(cntPoint.listOfObsPoint.Count != 0)
                 {
-                    arythAvrgOfX += obsPoint.X;
-                    arythAvrgOfY += obsPoint.Y;
-                }
-                arythAvrgOfX /= cntPoint.listOfObsPoint.Count;
-                arythAvrgOfY /= cntPoint.listOfObsPoint.Count;
+                    arythAvrgOfX = 0;
+                    arythAvrgOfY = 0;
 
-                cntPoint.X = arythAvrgOfX;
-                cntPoint.Y = arythAvrgOfY;
+                    cntPoint.PrevAvgX = cntPoint.X;
+                    cntPoint.PrevAvgY = cntPoint.Y;
 
-                cntPoint.listOfObsPoint.Clear();
+                    foreach (ObservablePoint obsPoint in cntPoint.listOfObsPoint)
+                    {
+                        arythAvrgOfX += obsPoint.X;
+                        arythAvrgOfY += obsPoint.Y;
+                    }
+
+                    arythAvrgOfX /= cntPoint.listOfObsPoint.Count;
+                    arythAvrgOfY /= cntPoint.listOfObsPoint.Count;
+
+                    cntPoint.X = arythAvrgOfX;
+                    cntPoint.Y = arythAvrgOfY;
+
+                    cntPoint.listOfObsPoint.Clear();
+                } 
             }
         }
 
@@ -142,6 +148,28 @@ namespace SelfOrganizingNetwork
             }
 
             return true;
+        }
+
+        public void MSECalculation()
+        {
+            List<double> values = new List<double>();
+            double mseEpochValue = 0;
+            double dist;
+
+            foreach (ObservablePoint obsPoint in observableList)
+            {
+                foreach (CenterPoint cntPoint in centerList)
+                {
+                    dist = DistanceCalculation(cntPoint, obsPoint);
+                    values.Add(dist);
+                }
+
+                mseEpochValue += values.Min();
+                values.Clear();
+            }
+
+            mseEpochValue /= observableList.Count;
+            mseValues.Add(mseEpochValue);
         }
     }
 }

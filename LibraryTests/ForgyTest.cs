@@ -167,6 +167,7 @@ namespace LibraryTests
             {
                 forgy.CentreCoordinatesCorrection();
                 forgy.AssignToCenter();
+                forgy.MSECalculation();
                 iterations++;
 
             } while (!forgy.CheckTheDiff());
@@ -195,6 +196,7 @@ namespace LibraryTests
 
             forgy.fileOp.SaveCenterList(forgy.centerList, "Centers_F_DF.txt");
             forgy.fileOp.SaveObservableList(forgy.observableList, "Observable_F_DF.txt");
+            forgy.fileOp.SaveMSEList(forgy.mseValues, "MSE_F.txt");
         }
 
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace SelfOrganizingNetwork
 {
@@ -23,8 +24,8 @@ namespace SelfOrganizingNetwork
             foreach(string line in fileData)
             {
                 string[] splitedLine = line.Split(',');
-                
-                Coordinates.Add(new Tuple<double, double>(double.Parse(splitedLine[0].Replace('.',',')), double.Parse(splitedLine[1].Replace('.', ','))));
+
+                Coordinates.Add(new Tuple<double, double>(double.Parse(splitedLine[0], CultureInfo.InvariantCulture), double.Parse(splitedLine[1], CultureInfo.InvariantCulture)));
             }  
         }
 
@@ -50,6 +51,20 @@ namespace SelfOrganizingNetwork
             foreach (ObservablePoint obsPoint in list)
             {
                 ostream.WriteLine(obsPoint.X + " " + obsPoint.Y);
+            }
+
+            ostream.Close();
+            fileStream.Close();
+        }
+
+        public void SaveMSEList(List<double> list, string filename)
+        {
+            FileStream fileStream = new FileStream(filename, FileMode.Create);
+
+            StreamWriter ostream = new StreamWriter(fileStream);
+            foreach (double value in list)
+            {
+                ostream.WriteLine(value);
             }
 
             ostream.Close();

@@ -46,11 +46,5 @@ namespace SelfOrganizingNetwork
 
         public double PrevAvgX { get; set; }
         public double PrevAvgY { get; set; }
-
-        public double GroupOfCenter
-        {
-            get;
-            set;
-        }
     }
 }

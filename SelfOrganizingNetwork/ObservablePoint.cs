@@ -25,12 +25,5 @@ namespace SelfOrganizingNetwork
             get;
             private set;
         }
-
-        public double Group
-        {
-            get;
-            set;
-        }
-
     }
 }

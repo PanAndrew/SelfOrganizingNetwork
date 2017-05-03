@@ -14,6 +14,8 @@ namespace SelfOrganizingNetwork
         public List<ObservablePoint> observableList { get; private set; }
         public List<CenterPoint> centerList { get; private set; }
 
+        public List<double> mseValues { get; private set; }
+
         public Forgy(int numberOfCenters)
         {
             this.NumberOfCenters = numberOfCenters;
@@ -21,6 +23,7 @@ namespace SelfOrganizingNetwork
 
             observableList = new List<ObservablePoint>();
             centerList = new List<CenterPoint>();
+            mseValues = new List<double>();
 
             fileOp.LoadCoordinates();
         }
@@ -109,6 +112,28 @@ namespace SelfOrganizingNetwork
             }
 
             return true;
+        }
+
+        public void MSECalculation()
+        {
+            List<double> values = new List<double>();
+            double mseEpochValue = 0;
+            double dist;
+
+            foreach (ObservablePoint obsPoint in observableList)
+            {
+                foreach (CenterPoint cntPoint in centerList)
+                {
+                    dist = DistanceCalculation(cntPoint, obsPoint);
+                    values.Add(dist);
+                }
+
+                mseEpochValue += values.Min();
+                values.Clear();
+            }
+
+            mseEpochValue /= observableList.Count;
+            mseValues.Add(mseEpochValue);
         }
 
     }

@@ -48,7 +48,6 @@ namespace LibraryTests
         {
             randPartition.TupleToObjects();
             randPartition.RandomAssignToCenters();
-            //randPartition.AssignToCenter();
 
             Assert.AreEqual(numberOfCenters, randPartition.centerList.Count);
 
@@ -64,7 +63,6 @@ namespace LibraryTests
         {
             randPartition.TupleToObjects();
             randPartition.RandomAssignToCenters();
-            //randPartition.AssignToCenter();
 
             Assert.AreEqual(numberOfCenters, randPartition.centerList.Count);
 
@@ -155,7 +153,6 @@ namespace LibraryTests
             int iterations = 0;
             randPartition.TupleToObjects();
             randPartition.RandomAssignToCenters();
-            //randPartition.AssignToCenter();
 
             Assert.AreEqual(numberOfCenters, randPartition.centerList.Count);
 
@@ -179,6 +176,7 @@ namespace LibraryTests
             {
                 randPartition.CentreCoordinatesCorrection();
                 randPartition.AssignToCenter();
+                randPartition.MSECalculation();
                 iterations++;
 
             } while (!randPartition.CheckTheDiff());
@@ -206,6 +204,7 @@ namespace LibraryTests
 
             randPartition.fileOp.SaveCenterList(randPartition.centerList, "Centers_RP_DF.txt");
             randPartition.fileOp.SaveObservableList(randPartition.observableList, "Observable_RP_DF.txt");
+            randPartition.fileOp.SaveMSEList(randPartition.mseValues, "MSE_RP.txt");
         }
     }
 }

@@ -30,7 +30,7 @@ namespace SelfOrganizingNetwork
 
         public void SaveCenterList(List<CenterPoint> list, string filename)
         {
-            FileStream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
+            FileStream fileStream = new FileStream(filename, FileMode.Create);
 
             StreamWriter ostream = new StreamWriter(fileStream);
             foreach(CenterPoint cntPoint in list)
@@ -44,7 +44,7 @@ namespace SelfOrganizingNetwork
 
         public void SaveObservableList(List<ObservablePoint> list, string filename)
         {
-            FileStream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
+            FileStream fileStream = new FileStream(filename, FileMode.Create);
 
             StreamWriter ostream = new StreamWriter(fileStream);
             foreach (ObservablePoint obsPoint in list)

@@ -14,6 +14,7 @@ namespace SelfOrganizingNetwork
         public List<ObservablePoint> observableList { get; private set; }
         public List<CenterPoint> centerList { get; private set; }
 
+
         public RandomPartition(int numberOfCenters)
         {
             this.NumberOfCenters = numberOfCenters;
@@ -33,26 +34,47 @@ namespace SelfOrganizingNetwork
             }
         }
 
-        public void RandCenters()
+        public void RandomAssignToCenters()
         {
             Random rnd = new Random();
             int it = 0;
+
+            double arythAvrgOfX;
+            double arythAvrgOfY;
+
+            List<List<ObservablePoint>> groupsOfObsPoints = new List<List<ObservablePoint>>(NumberOfCenters);
+
             for (int i = 0; i < NumberOfCenters; i++)
             {
-                it = rnd.Next(0, observableList.Count);
-                centerList.Add(new CenterPoint(observableList.ElementAt(it)));
-                //observableList.RemoveAt(it);  // Trzeba zdecydowac czy po przypisanu do ktoregos pkt. obser. centrum zdejmujemy go z tablicy czy nie ale raczej nie
+                groupsOfObsPoints.Add(new List<ObservablePoint>());
             }
-        }
 
-        public void RandomAssignToCenters()
-        {
-            Random rand = new Random();
-            int it = 0;
             foreach (ObservablePoint obsPoint in observableList)
             {
-                it = rand.Next(0, centerList.Count);
-                centerList.ElementAt(it).listOfObsPoint.Add(obsPoint);
+                it = rnd.Next(0, NumberOfCenters);
+                groupsOfObsPoints.ElementAt(it).Add(obsPoint);
+            }
+
+            foreach (List<ObservablePoint> listOf in groupsOfObsPoints)
+            {
+                arythAvrgOfX = 0;
+                arythAvrgOfY = 0;
+
+                foreach (ObservablePoint obsPoint in listOf)
+                {
+                    arythAvrgOfX += obsPoint.X;
+                    arythAvrgOfY += obsPoint.Y;
+                }
+
+                arythAvrgOfX /= listOf.Count;
+                arythAvrgOfY /= listOf.Count;
+
+                centerList.Add(new CenterPoint(arythAvrgOfX, arythAvrgOfY));
+
+                foreach (ObservablePoint obsPoint in listOf)
+                {
+                    centerList.Last().listOfObsPoint.Add(obsPoint);
+                }
             }
         }
 

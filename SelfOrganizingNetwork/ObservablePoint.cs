@@ -29,7 +29,7 @@ namespace SelfOrganizingNetwork
         public double Group
         {
             get;
-            private set;
+            set;
         }
 
     }

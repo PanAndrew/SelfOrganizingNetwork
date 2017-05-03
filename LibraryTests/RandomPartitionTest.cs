@@ -35,10 +35,10 @@ namespace LibraryTests
         }
 
         [TestMethod]
-        public void RandCentersTest_RP()
+        public void RandomAssignToCentersTest_RP()
         {
             randPartition.TupleToObjects();
-            randPartition.RandCenters();
+            randPartition.RandomAssignToCenters();
 
             Assert.AreEqual(numberOfCenters, randPartition.centerList.Count);
         }
@@ -47,7 +47,6 @@ namespace LibraryTests
         public void AssignToCenterTest_RP()
         {
             randPartition.TupleToObjects();
-            randPartition.RandCenters();
             randPartition.RandomAssignToCenters();
             //randPartition.AssignToCenter();
 
@@ -64,7 +63,6 @@ namespace LibraryTests
         public void CentreCoordinatesCorrectionTest_RP()
         {
             randPartition.TupleToObjects();
-            randPartition.RandCenters();
             randPartition.RandomAssignToCenters();
             //randPartition.AssignToCenter();
 
@@ -76,6 +74,9 @@ namespace LibraryTests
             }
             Console.WriteLine("");
 
+            randPartition.fileOp.SaveCenterList(randPartition.centerList, "Centers_RP.txt");
+            randPartition.fileOp.SaveObservableList(randPartition.observableList, "Observable_RP.txt");
+            //-------------------------------------------------------------------
             Console.WriteLine("Pojedyńcza korekta koordynatow centrów: ");
             randPartition.CentreCoordinatesCorrection();
 
@@ -86,6 +87,9 @@ namespace LibraryTests
                 Console.WriteLine("Do centrum " + i + " przypisano " + randPartition.centerList.ElementAt(i).listOfObsPoint.Count + " punktow obserwacji.");
             }
             Console.WriteLine("");
+
+            randPartition.fileOp.SaveCenterList(randPartition.centerList, "Centers_RP0.txt");
+            randPartition.fileOp.SaveObservableList(randPartition.observableList, "Observable_RP0.txt");
             //-------------------------------------------------------------------
             Console.WriteLine("Dziesięciokrotna korekta koordynatow centrów: ");
             for (int i = 0; i < 10; i++)
@@ -150,7 +154,6 @@ namespace LibraryTests
         {
             int iterations = 0;
             randPartition.TupleToObjects();
-            randPartition.RandCenters();
             randPartition.RandomAssignToCenters();
             //randPartition.AssignToCenter();
 

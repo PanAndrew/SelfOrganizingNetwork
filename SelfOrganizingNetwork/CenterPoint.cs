@@ -21,6 +21,17 @@ namespace SelfOrganizingNetwork
             PrevAvgY = 0;
         }
 
+        public CenterPoint(double avgX, double avgY)
+        {
+            this.X = avgX;
+            this.Y = avgY;
+
+            listOfObsPoint = new List<ObservablePoint>();
+
+            PrevAvgX = 0;
+            PrevAvgY = 0;
+        }
+
         public double X
         {
             get;

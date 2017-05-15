@@ -43,6 +43,8 @@
     <Compile Include="CenterPoint.cs" />
     <Compile Include="FileOperation.cs" />
     <Compile Include="Forgy.cs" />
+    <Compile Include="Network.cs" />
+    <Compile Include="Neuron.cs" />
     <Compile Include="ObservablePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomPartition.cs" />

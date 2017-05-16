@@ -16,15 +16,19 @@ namespace SelfOrganizingNetwork
         private int width;
         private int height;
 
+        private int range;
+
         public List<List<Neuron>> NetworkOfNeurons { get; set; }
 
-        public Network(int width, int height, List<ObservablePoint> observableList)
+        public Network(int width, int height, List<ObservablePoint> observableList, int range)
         {
             NetworkOfNeurons = new List<List<Neuron>>();
             CountMaxsAndMinsCoordinates(observableList);
 
             this.width = width;
             this.height = height;
+
+            this.range = range;
 
             for (int i = 0; i < width; i++)
             {
@@ -34,7 +38,6 @@ namespace SelfOrganizingNetwork
             FillNetwork();
 
             SetNeighborhood();
-
         }
 
         private void CountMaxsAndMinsCoordinates(List<ObservablePoint> observableList)
@@ -84,18 +87,43 @@ namespace SelfOrganizingNetwork
 
         private void SetNeighborhood()
         {
-            for (int i = 0; i < width - 1; i++)
-            {
-                for (int j = 0; j < height - 1; j++)
-                {
-                    NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i + 1][j]);
-                    NetworkOfNeurons[i + 1][j].AddNeighbour(NetworkOfNeurons[i][j]);
+            //Przypisywanie sasiadów w zależności od zdefiniowanego zasiegu
+            int radius = 0;
 
-                    NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i][j + 1]);
-                    NetworkOfNeurons[i][j + 1].AddNeighbour(NetworkOfNeurons[i][j]);
+            for (int i = 0; i < width; i++)
+            {
+                for(int j = 0; j < height; j++)
+                {
+                    for(int k = 0; k < width; k++)
+                    {
+                        for(int m = 0; m < height; m++)
+                        {
+                            if (!NetworkOfNeurons[i][j].Equals(NetworkOfNeurons[k][m])) //Check if it's not the same neuron
+                            {
+                                radius = Math.Abs(i - k) + Math.Abs(j - m);
+
+                                if (radius <= range)
+                                {
+                                    NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[k][m]);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
+            //Przypisywanie sąsiedztwa o promieniu 1. Zostawiam na wszelki wypadek.
+            //for (int i = 0; i < width - 1; i++)
+            //{
+            //    for (int j = 0; j < height - 1; j++)
+            //    {
+            //        NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i + 1][j]);
+            //        NetworkOfNeurons[i + 1][j].AddNeighbour(NetworkOfNeurons[i][j]);
+
+            //        NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i][j + 1]);
+            //        NetworkOfNeurons[i][j + 1].AddNeighbour(NetworkOfNeurons[i][j]);
+            //    }
+            //}
         }
 
     }

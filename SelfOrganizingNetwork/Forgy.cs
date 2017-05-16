@@ -124,7 +124,7 @@ namespace SelfOrganizingNetwork
             {
                 foreach (CenterPoint cntPoint in centerList)
                 {
-                    dist = DistanceCalculation(cntPoint, obsPoint);
+                    dist = Math.Pow(DistanceCalculation(cntPoint, obsPoint),2);
                     values.Add(dist);
                 }
 

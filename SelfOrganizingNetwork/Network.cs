@@ -75,28 +75,22 @@ namespace SelfOrganizingNetwork
 
                 for (int j = 0; j < height; j++)
                 {
-                    portionOfY -= ArrangementOfY(height);
-
                     NetworkOfNeurons[i].Add(new Neuron(portionOfX,portionOfY));
+
+                    portionOfY -= ArrangementOfY(height);
                 }
             }
         }
 
         private void SetNeighborhood()
         {
-            for (int i = 0; i < height - 1; i++)
-            {
-                for (int j = 0; j < width - 1; j++)
-                {
-                    NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i][j + 1]);
-                    NetworkOfNeurons[i][j + 1].AddNeighbour(NetworkOfNeurons[i][j]);
-                }
-            }
-
             for (int i = 0; i < width - 1; i++)
             {
                 for (int j = 0; j < height - 1; j++)
                 {
+                    NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i + 1][j]);
+                    NetworkOfNeurons[i + 1][j].AddNeighbour(NetworkOfNeurons[i][j]);
+
                     NetworkOfNeurons[i][j].AddNeighbour(NetworkOfNeurons[i][j + 1]);
                     NetworkOfNeurons[i][j + 1].AddNeighbour(NetworkOfNeurons[i][j]);
                 }
